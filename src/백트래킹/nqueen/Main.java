@@ -14,20 +14,22 @@ public class Main {
                 board[i][j] = 0;
             }
         }
-        NQueen nQueen=new NQueen();
-        nQueen.run(board,N,0);
+        NQueen nQueen=new NQueen(N);
+        nQueen.run(board,0);
         nQueen.printCount();
     }
 }
 
 class NQueen {
     int count;
+    int N;
 
-    public NQueen() {
+    public NQueen(int N) {
         this.count = 0;
+        this.N = N;
     }
 
-    public void run(int[][] board, int N, int currentRow) {
+    public void run(int[][] board,  int currentRow) {
 
         //탈출조건
         if (N == currentRow) {
@@ -35,53 +37,37 @@ class NQueen {
             return;
         }
 
-        for (int i = 0; i < N; i++) {
+        for(int i=0;i<N;i++){
             board[currentRow][i] = 1;
-
-            for (int j = 0; j < N; j++) {
-                printBoard(board,N);
-                System.out.println();
-
-                if (board[j][i] == 1 && currentRow!=j) {
-                    board[currentRow][i] = 0;
-                    break;
-                }
-                if(board[currentRow][j]==1&& i!=j){
-                    board[currentRow][i] = 0;
-                    break;
-                }
-
-                if (currentRow - j  >= 0 && i - j  >= 0) {
-                    if (board[currentRow - j][i - j] == 1) {
-                        board[currentRow][i] = 0;
-                        break;
-                    }
-                }
-                if (currentRow + j <= N - 1 && i + j <= N-1) {
-                    if (board[currentRow + j][i + j] == 1) {
-                        board[currentRow][i] = 0;
-                        break;
-                    }
-                }
-                if (currentRow - j >= 0 && i + j <= N - 1) {
-                    if (board[currentRow - j][i + j] == 1) {
-                        board[currentRow][i] = 0;
-                        break;
-                    }
-                }
-                if (currentRow + j <= N - 1 && i - j  >= 0) {
-                    if (board[currentRow + j][i - j] == 1) {
-                        board[currentRow][i] = 0;
-                        break;
-                    }
-                }
-            }
-            if (board[currentRow][i] == 1) {
-                run(board, N, currentRow + 1);
-            }
+            //검사
+            if(inspect(board,currentRow,i)) run(board,currentRow+1);
+            board[currentRow][i] = 0;
         }
 
     }
+
+    private boolean inspect(int[][] board, int currentRow, int currentCol){
+        for(int i=0;i<N;i++){
+            if((board[i][currentCol] == 1 && i!=currentRow) || (board[currentRow][i] ==1 && i!=currentCol))
+                return false;
+        }
+        for(int i=1;i<N;i++){
+            if(currentRow-i>=0 && currentCol-i>=0){
+                if(board[currentRow-i][currentCol-i] ==1) return false;
+            }
+            if(currentRow-i>=0 && currentCol+i<N){
+                if(board[currentRow-i][currentCol+i] ==1) return false;
+            }
+            if(currentRow+i<N && currentCol-i>=0){
+                if(board[currentRow+i][currentCol-i] ==1) return false;
+            }
+            if(currentRow+i<N && currentCol+i<N){
+                if(board[currentRow+i][currentCol+i] ==1) return false;
+            }
+        }
+        return true;
+    }
+
     public void printCount(){
         System.out.println(count);
     }

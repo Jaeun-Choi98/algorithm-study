@@ -3,7 +3,7 @@ package 그리디알고리즘.회의실배정;
 import java.util.Arrays;
 import java.util.Scanner;
 
-//활동선택문제(Activity Selection problem)
+//활동선택문제
 public class Main {
     public static void main(String[] args) {
         int N;
@@ -15,8 +15,22 @@ public class Main {
         for (int i = 0; i < N; i++) {
             meetings[i] = new Meeting(sc.nextInt(), sc.nextInt());
         }
-        Arrays.stream(meetings).sorted()
+        Arrays.sort(meetings,(o1, o2) ->
+        {
+            if(o1.getEnd() == o2.getEnd()) return o1.getStart() - o2.getStart();
+            else return o1.getEnd() - o2.getEnd();
+        });
 
+        int count =0;
+        int check =0;
+        for(int i=0;i<N;i++){
+            if(check <= meetings[i].getStart()){
+                check = meetings[i].getEnd();
+                count++;
+            }
+        }
+
+        System.out.println(count);
     }
 }
 
@@ -34,10 +48,6 @@ class Meeting{
 
     public int getEnd() {
         return end;
-    }
-
-    public int getSub(){
-        return end - start;
     }
 
     @Override

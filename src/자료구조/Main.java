@@ -1,4 +1,4 @@
-package 자료구조.큐와스택;
+package 자료구조;
 
 import java.util.LinkedList;
 import java.util.Queue;

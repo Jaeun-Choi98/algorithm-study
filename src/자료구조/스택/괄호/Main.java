@@ -17,33 +17,21 @@ public class Main {
         sc.nextLine();
         for(int i=0;i<N;i++){
             buf = sc.nextLine();
-            //System.out.println(buf);
-            for(int j=0;j<buf.length();j++){
-                stack.push(buf.charAt(j));
-            }
-            count =0;
+            stack.clear();
             check = true;
-            while (!stack.empty()){
-                chBuf = stack.pop();
-                if(chBuf == ')'){
-                    count++;
-                }else{
-                    count--;
-                    while(stack.pop() != ')'){
-                        count--;
-                    }
-                    if(count !=0) {
-                        System.out.println("NO");
-                        System.out.println(count);
+            for(int j=0;j<buf.length();j++){
+                chBuf = buf.charAt(j);
+                if(chBuf == ')') {
+                    if(stack.empty()) {
                         check = false;
                         break;
-                    }else{
-                        count++;
                     }
+                    stack.pop();
                 }
+                else stack.push(buf.charAt(j));
             }
-            if(check) System.out.println("YES");
+            if(stack.empty() && check == true) System.out.println("YES");
+            else System.out.println("NO");
         }
     }
-
 }

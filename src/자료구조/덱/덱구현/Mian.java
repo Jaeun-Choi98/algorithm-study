@@ -1,4 +1,4 @@
-package 자료구조.덱;
+package 자료구조.덱.덱구현;
 
 public class Mian {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package 재귀.fibonacci;
+package 분할정복.fibonacci;
 
 import java.util.Scanner;
 

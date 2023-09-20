@@ -1,4 +1,4 @@
-package 재귀.곱셈;
+package 분할정복.곱셈;
 
 import java.util.Scanner;
 

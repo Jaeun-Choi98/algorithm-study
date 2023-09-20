@@ -1,4 +1,4 @@
-package 재귀.하노이탑;
+package 분할정복.하노이탑;
 
 import java.util.Scanner;
 

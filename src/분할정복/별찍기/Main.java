@@ -1,4 +1,4 @@
-package 재귀.별찍기;
+package 분할정복.별찍기;
 
 import java.util.Scanner;
 

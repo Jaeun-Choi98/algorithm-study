@@ -1,4 +1,4 @@
-package 재귀.factorial;
+package 분할정복.factorial;
 
 import java.util.Scanner;
 

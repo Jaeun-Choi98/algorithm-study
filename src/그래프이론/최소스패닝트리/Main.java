@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 /*
-그래프이론, 최소스패닝트리(MST).feat(크루스칼알고리즘)
+그래프이론, 최소스패닝트리(MST).feat(프림알고리즘)
 [problem](https://www.acmicpc.net/problem/1197)
  */
 

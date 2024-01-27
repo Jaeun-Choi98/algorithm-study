@@ -10,7 +10,7 @@ public class Main {
     dp
     [problem](https://www.acmicpc.net/problem/15486)
      */
-    
+
     static int n;
     static int[][] data;
     static int[] d;

@@ -13,3 +13,8 @@ func TestKmp(t *testing.T) {
 	ans := []int{16}
 	assert.Equal(ans, Kmp(text, pattern))
 }
+
+func TestTrietest(t *testing.T) {
+	assert := assert.New(t)
+	assert.Equal(true, Trietest())
+}

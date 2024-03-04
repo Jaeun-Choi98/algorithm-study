@@ -12,6 +12,7 @@ func GetPartialLPS(pattern string) []int {
 			i++
 		} else {
 			if j == 0 {
+				//lps[i] = 0
 				i++
 			} else {
 				j = lps[j-1]
@@ -19,6 +20,18 @@ func GetPartialLPS(pattern string) []int {
 		}
 
 	}
+
+	/*
+		for i < m {
+			for j > 0 && pattern[i] != pattern[j] {
+				j = lps[j-1]
+			}
+			if pattern[i] == pattern[j] {
+				j++
+				lps[i] = j
+			}
+		}
+	*/
 	return lps
 }
 

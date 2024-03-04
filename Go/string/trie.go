@@ -2,7 +2,9 @@ package string
 
 type TrieNode struct {
 	child  map[rune]*TrieNode
+	fail   *TrieNode
 	isWord bool
+	isRoot bool
 }
 
 type Trie struct {
@@ -10,14 +12,14 @@ type Trie struct {
 }
 
 func NewTrie() *Trie {
-	return &Trie{&TrieNode{make(map[rune]*TrieNode), false}}
+	return &Trie{&TrieNode{make(map[rune]*TrieNode), nil, false, true}}
 }
 
 func (trie *Trie) Insert(word string) {
 	cur := trie.root
 	for _, ch := range word {
 		if cur.child[ch] == nil {
-			cur.child[ch] = &TrieNode{make(map[rune]*TrieNode), false}
+			cur.child[ch] = &TrieNode{make(map[rune]*TrieNode), nil, false, false}
 		}
 		cur = cur.child[ch]
 	}

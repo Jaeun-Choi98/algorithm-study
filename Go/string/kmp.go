@@ -22,7 +22,7 @@ func GetPartialLPS(pattern string) []int {
 	}
 
 	/*
-		for i < m {
+		for ;i < m; i++ {
 			for j > 0 && pattern[i] != pattern[j] {
 				j = lps[j-1]
 			}

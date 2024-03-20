@@ -1,21 +1,34 @@
 package 분할정복.곱셈;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Integer a,b,c;
-        Scanner scanner = new Scanner(System.in);
+    /*
+    분할정복
+    [problem](https://www.acmicpc.net/problem/1629)
+     */
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int a,b,c;
+        a = Integer.parseInt(st.nextToken());
+        b = Integer.parseInt(st.nextToken());
+        c = Integer.parseInt(st.nextToken());
 
-        a=scanner.nextInt();b=scanner.nextInt();c=scanner.nextInt();
-        System.out.println(mut(a,b,c));
+        System.out.printf("%d ", search(a,b,c));
+        br.close();
     }
 
-    static public Integer mut(Integer a, Integer b, Integer c){
+    static long search(int a, int b, int c){
         if(b==1) return a%c;
-        Integer val = mut(a,b/2,c);
-        val = val*val%c;
-        if(b%2==0) return val;
-        return val*a%c;
+
+        long val = search(a,b/2,c);
+
+        if(b%2==0) return (val * val) % c;
+        else return ((val * val) % c) * a % c;
     }
 }

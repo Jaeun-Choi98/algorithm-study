@@ -1,46 +1,48 @@
 package 자료구조.스택.오큰수;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
+    /*
+    stack
+    [problem](https://www.acmicpc.net/problem/17298)
+     */
+    public static void main(String[] args) throws IOException {
         int N;
-        int[] arr;
-        int buf;
-        Stack<Integer> stack = new Stack<>();
-        Scanner scanner = new Scanner(System.in);
-        StringBuilder stringBuilder = new StringBuilder();
+        Stack<Integer[]> stack = new Stack<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        // 1.
-        N = scanner.nextInt();
+        N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] res = new int[N];
 
-        arr = new int[N];
-        for(int i=0;i<N;i++) arr[i] = scanner.nextInt();
-
-        // 2.
-
-        //(1)
-        buf = arr[N-1];
-        stack.push(-1);
-
-        //(2)
-        for(int i= N-2;i>=0;i--){
-            //(3)
-            if(arr[i] < arr[i+1]) buf = arr[i+1];
-
-            if(buf <= arr[i]) stack.push(-1);
-            else{
-                stack.push(buf);
+        for(int i=0;i<N;i++) {
+            int buf = Integer.parseInt(st.nextToken());
+            if(stack.isEmpty()) {
+                stack.push(new Integer[]{i,buf});
+                continue;
             }
+            while(!stack.isEmpty() && stack.peek()[1] < buf){
+                Integer[] idxAndVal = stack.pop();
+                res[idxAndVal[0]] = buf;
+            }
+            stack.push(new Integer[]{i,buf});
         }
 
-        //3.
-        while (!stack.empty()){
-            stringBuilder.append(stack.pop()).append(" ");
+        while (!stack.isEmpty()){
+            Integer[] idxAndVal = stack.pop();
+            res[idxAndVal[0]] = -1;
         }
-
-        System.out.println(stringBuilder);
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(res).forEach(i-> sb.append(i+ " "));
+        System.out.println(sb);
+        br.close();
     }
 }
 

@@ -6,7 +6,7 @@ func (trie *Trie) Fail() {
 	que = append(que, trie.root)
 	idx++
 	for idx > 0 {
-		cur := que[idx]
+		cur := que[0]
 		idx--
 		que = que[1:]
 		if cur.child == nil {

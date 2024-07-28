@@ -106,7 +106,7 @@ func prim() int {
 	*/
 	heap.Push(&pq, &priorityqueue.Item{0, 0, -1})
 	for len(pq) != 0 {
-		item := pq.Pop().(*priorityqueue.Item)
+		item := heap.Pop(&pq).(*priorityqueue.Item)
 		cur := item.Val
 		val := item.Priority
 		if visited[cur] {

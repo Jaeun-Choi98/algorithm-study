@@ -8,10 +8,10 @@ func LowerSearch(arr []int, target int) int {
 		sort.Slice(arr, func(i, j int) bool { return arr[i] < arr[j] })
 	}
 	l, r := 0, len(arr)-1
-	for l <= r {
+	for l < r {
 		mid := (l + r) / 2
-		if arr[mid] <= target {
-			r = mid - 1
+		if target <= arr[mid] {
+			r = mid
 		} else {
 			l = mid + 1
 		}

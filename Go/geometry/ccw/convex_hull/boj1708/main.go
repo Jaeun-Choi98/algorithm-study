@@ -91,10 +91,10 @@ func main() {
 func ccw(a, b, target Point) int {
 	vectorAtoB := Point{b.x - a.x, b.y - a.y}
 	vectorAtoTarget := Point{target.x - a.x, target.y - a.y}
-	outerProduct := int64(vectorAtoB.x)*int64(vectorAtoTarget.y) - int64(vectorAtoB.y)*int64(vectorAtoTarget.x)
-	if outerProduct < 0 {
+	crossProduct := int64(vectorAtoB.x)*int64(vectorAtoTarget.y) - int64(vectorAtoB.y)*int64(vectorAtoTarget.x)
+	if crossProduct < 0 {
 		return -1
-	} else if outerProduct == 0 {
+	} else if crossProduct == 0 {
 		return 0
 	} else {
 		return 1

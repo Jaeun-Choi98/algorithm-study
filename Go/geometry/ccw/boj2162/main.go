@@ -109,10 +109,10 @@ func isPointOnSegment(a1, b1, a2, b2 Point) bool {
 func CCW(a, b, target Point) int {
 	vectorAtoB := Point{b.x - a.x, b.y - a.y}
 	vectorAtoTarget := Point{target.x - a.x, target.y - a.y}
-	outerProduct := vectorAtoB.x*vectorAtoTarget.y - vectorAtoB.y*vectorAtoTarget.x
-	if outerProduct < 0 {
+	crossProduct := vectorAtoB.x*vectorAtoTarget.y - vectorAtoB.y*vectorAtoTarget.x
+	if crossProduct < 0 {
 		return -1
-	} else if outerProduct == 0 {
+	} else if crossProduct == 0 {
 		return 0
 	} else {
 		return 1

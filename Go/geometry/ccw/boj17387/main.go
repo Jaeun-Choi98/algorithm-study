@@ -64,10 +64,10 @@ func IsCross(a1, b1, a2, b2 Point) bool {
 func CCW(a, b, target Point) int {
 	vectorAtoB := Point{b.x - a.x, b.y - a.y}
 	vectorAtoTar := Point{target.x - a.x, target.y - a.y}
-	outerProduct := vectorAtoB.x*vectorAtoTar.y - vectorAtoB.y*vectorAtoTar.x
-	if outerProduct < 0 {
+	crossProduct := vectorAtoB.x*vectorAtoTar.y - vectorAtoB.y*vectorAtoTar.x
+	if crossProduct < 0 {
 		return -1
-	} else if outerProduct == 0 {
+	} else if crossProduct == 0 {
 		return 0
 	} else {
 		return 1

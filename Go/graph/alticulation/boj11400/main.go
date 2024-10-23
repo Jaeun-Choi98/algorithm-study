@@ -4,23 +4,23 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
 
 /*
-[problem](https://www.acmicpc.net/problem/11266)
+[problem](https://www.acmicpc.net/problem/11400)
 */
 
 var (
 	reader = bufio.NewReader(os.Stdin)
 	writer = bufio.NewWriter(os.Stdout)
+	graph  [][]int
+	ans    [][]int
 	ids    []int
 	id     int
-	graph  [][]int
 	V, E   int
-	cnt    int
-	ans    []bool
 )
 
 func main() {
@@ -29,59 +29,60 @@ func main() {
 	V, E = atoi(st[0]), atoi(st[1])
 	graph = make([][]int, V+1)
 	ids = make([]int, V+1)
-	ans = make([]bool, V+1)
 	for i := 0; i <= V; i++ {
 		graph[i] = make([]int, 0)
 	}
+
 	for i := 0; i < E; i++ {
 		st = stringTokenizer(" ")
 		s, e := atoi(st[0]), atoi(st[1])
 		graph[s] = append(graph[s], e)
 		graph[e] = append(graph[e], s)
 	}
+	ans = make([][]int, 0)
 	id = 1
-	cnt = 0
 	for i := 1; i <= V; i++ {
 		if ids[i] != 0 {
 			continue
 		}
-		search(i, 0, true)
+		search(i, 0)
 	}
-	fmt.Fprintln(writer, cnt)
-	for i := 1; i <= V; i++ {
-		if ans[i] {
-			fmt.Fprintf(writer, "%d ", i)
+	sort.Slice(ans, func(i, j int) bool {
+		if ans[i][0] != ans[j][0] {
+			return ans[i][0] < ans[j][0]
+		} else {
+			return ans[i][1] < ans[j][1]
 		}
+	})
+	fmt.Fprintln(writer, len(ans))
+	for i := 0; i < len(ans); i++ {
+		fmt.Fprintln(writer, ans[i][0], ans[i][1])
 	}
 }
 
-func search(idx, parent int, root bool) int {
+func search(idx, parent int) int {
 	ids[idx] = id
 	id++
 	ret := ids[idx]
-	degree := 0
 	for _, next := range graph[idx] {
 		if next == parent {
 			continue
 		}
-		// 이미 방문한 정점이면서(Backword Edge가 존재하면서), 상위 정점이라면 상위 정점을 반환.
 		if ids[next] != 0 {
 			ret = min(ret, ids[next])
 			continue
 		}
-		subTreeRet := search(next, idx, false)
-		if !root && subTreeRet >= ids[idx] && !ans[idx] {
-			ans[idx] = true
-			cnt++
+		subTreeRet := search(next, idx)
+		if ids[idx] < subTreeRet {
+			a, b := idx, next
+			if a > b {
+				a, b = b, a
+			}
+			ans = append(ans, []int{a, b})
 		}
-		degree++
 		ret = min(ret, subTreeRet)
 	}
 
-	if root && degree > 1 {
-		ans[idx] = true
-		cnt++
-	}
 	return ret
 }
 

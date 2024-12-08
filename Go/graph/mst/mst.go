@@ -104,9 +104,9 @@ func prim() int {
 		2. 우선순위 큐에서 하나 추출(최소or최대)하고, 해당 정점이 방문한 정점이라면 건너뛰고, 그렇지 않다면 1번 작업을 실행
 		3. 모든 정점을 방문할 때까지 2번 반복
 	*/
-	heap.Push(&pq, &priorityqueue.Item{0, 0, -1})
+	heap.Push(&pq, priorityqueue.Item{0, 0})
 	for len(pq) != 0 {
-		item := heap.Pop(&pq).(*priorityqueue.Item)
+		item := heap.Pop(&pq).(priorityqueue.Item)
 		cur := item.Val
 		val := item.Priority
 		if visited[cur] {
@@ -115,7 +115,7 @@ func prim() int {
 		visited[cur] = true
 		ret += val
 		for _, node := range graph[cur] {
-			heap.Push(&pq, &priorityqueue.Item{node.dest, node.weight, -1})
+			heap.Push(&pq, priorityqueue.Item{node.dest, node.weight})
 		}
 	}
 	return ret

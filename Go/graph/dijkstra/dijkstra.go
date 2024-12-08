@@ -65,9 +65,9 @@ func dijkstra() {
 
 	// 시작 정점: 0 번째 인덱스
 	d[0] = 0
-	heap.Push(&pq, &priorityqueue.Item{0, 0, -1})
+	heap.Push(&pq, priorityqueue.Item{0, 0})
 	for len(pq) != 0 {
-		item := pq.Pop().(*priorityqueue.Item)
+		item := heap.Pop(&pq).(priorityqueue.Item)
 		cur := item.Val
 		dis := item.Priority
 		if dis > d[cur] {
@@ -78,7 +78,7 @@ func dijkstra() {
 			nextDis := dis + node.weight
 			if d[next] > nextDis {
 				d[next] = nextDis
-				heap.Push(&pq, &priorityqueue.Item{next, nextDis, -1})
+				heap.Push(&pq, priorityqueue.Item{next, nextDis})
 			}
 		}
 	}

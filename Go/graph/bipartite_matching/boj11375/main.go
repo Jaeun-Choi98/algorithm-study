@@ -1,0 +1,70 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+/*
+[problem](https://www.acmicpc.net/problem/11375)
+*/
+
+var (
+	reader  = bufio.NewReader(os.Stdin)
+	writer  = bufio.NewWriter(os.Stdout)
+	N, M    int
+	graph   [][]int
+	visited []bool
+	matches []int
+)
+
+func main() {
+	defer writer.Flush()
+	st := stringTokenizer(" ")
+	N, M = atoi32(st[0]), atoi32(st[1])
+	graph = make([][]int, N+1)
+	matches = make([]int, M+1)
+	for i := 1; i <= N; i++ {
+		graph[i] = make([]int, 0)
+		st = stringTokenizer(" ")
+		k := atoi32(st[0])
+		for j := 1; j <= k; j++ {
+			graph[i] = append(graph[i], atoi32(st[j]))
+		}
+	}
+	ans := 0
+	for i := 1; i <= N; i++ {
+		visited = make([]bool, N+1)
+		if dfs(i, &visited) {
+			ans++
+		}
+	}
+	fmt.Fprintln(writer, ans)
+}
+
+func dfs(u int, visited *[]bool) bool {
+	if (*visited)[u] {
+		return false
+	}
+	(*visited)[u] = true
+	for _, v := range graph[u] {
+		if matches[v] == 0 || dfs(matches[v], visited) {
+			matches[v] = u
+			return true
+		}
+	}
+	return false
+}
+
+func stringTokenizer(token string) []string {
+	line, _ := reader.ReadString('\n')
+	return strings.Split(strings.TrimSpace(line), token)
+}
+
+func atoi32(str string) int {
+	ret, _ := strconv.ParseInt(str, 10, 32)
+	return int(ret)
+}

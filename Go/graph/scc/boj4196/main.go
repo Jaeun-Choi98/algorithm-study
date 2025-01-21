@@ -23,6 +23,8 @@ var (
 	N, M          int
 	graph         [][]int
 	complete      []bool
+	sccNum        int
+	sccInfo       []int
 )
 
 func main() {
@@ -47,9 +49,12 @@ func main() {
 		ids = make([]int, N+1)
 		complete = make([]bool, N+1)
 		id = 1
+		sccInfo = make([]int, N+1)
+		sccNum = 0
 		for i := 1; i <= N; i++ {
 			if ids[i] == 0 {
-				targanSCC(i)
+				//targanSCC(i)
+				NewSccDfs(i)
 			}
 		}
 		visited := make([]bool, N+1)
@@ -63,9 +68,51 @@ func main() {
 				ans++
 			}
 		}
-		fmt.Fprintln(writer, ans)
+		newAns := 0
+		inDegreeScc := make([]int, sccNum)
+		for i := 0; i <= N; i++ {
+			for _, next := range graph[i] {
+				if sccInfo[i] != sccInfo[next] {
+					inDegreeScc[sccInfo[next]]++
+				}
+			}
+		}
+		for i := 0; i < sccNum; i++ {
+			if inDegreeScc[i] == 0 {
+				newAns++
+			}
+		}
+		fmt.Fprintln(writer, newAns)
 		tc--
 	}
+}
+
+func NewSccDfs(node int) int {
+	ids[node] = id
+	id++
+	stack.PushBack(node)
+	ret := ids[node]
+	for _, next := range graph[node] {
+		if ids[next] == 0 {
+			ret = min(ret, NewSccDfs(next))
+		} else if !complete[next] {
+			ret = min(ret, ids[next])
+		}
+	}
+	if ret == ids[node] {
+		for stack.Len() > 0 {
+			item := stack.Back()
+			stack.Remove(item)
+			cur := item.Value.(int)
+			complete[cur] = true
+			sccInfo[cur] = sccNum
+			if cur == node {
+				sccNum++
+				break
+			}
+		}
+	}
+	return ret
 }
 
 func search(cur int, visited *[]bool) {

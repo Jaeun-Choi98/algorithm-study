@@ -53,7 +53,7 @@ private:
   void addHistory(const std::string &record) { history_ += record + "\n"; };
 };
 
-void inline test_calc()
+void inline testCalc()
 {
   Calculator calc;
 

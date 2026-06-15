@@ -1,11 +1,11 @@
 CXX      = g++
 CXXFLAGS = -std=c++17 -Wall -Iinclude
 
-SRC = src/main.cpp src/calc/calculator.cpp
+SRC = src/main.cpp 
 OUT = app
 
 all:
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(OUT)
 
 clean:
-	rm -f $(OUT)
+	rm -f $(OUT) *.o *.bak

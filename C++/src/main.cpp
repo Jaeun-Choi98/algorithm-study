@@ -1,13 +1,12 @@
-#include "calc/calculator.hpp"
-#include "subset/subset.hpp"
-#include "permutation/permutation.hpp"
-#include "n-queen/n_queen.hpp"
-#include "sort/sort.hpp"
 #include "binary-search/binary_search.hpp"
+#include "calc/calculator.hpp"
 #include "dynamic-programing/dynamic_programing.hpp"
+#include "n-queen/n_queen.hpp"
+#include "permutation/permutation.hpp"
+#include "sort/sort.hpp"
+#include "subset/subset.hpp"
 
-int main()
-{
+int main() {
   // testCalc();
   // recursion::testSubset();
   // recursion::testPermutation();

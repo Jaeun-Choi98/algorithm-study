@@ -1,6 +1,7 @@
 #include "binary-search/binary_search.hpp"
 #include "calc/calculator.hpp"
-#include "dynamic-programing/dynamic_programing.hpp"
+#include "dynamic-programing/knapsack.hpp"
+#include "dynamic-programing/minimum_count_coin.hpp"
 #include "n-queen/n_queen.hpp"
 #include "permutation/permutation.hpp"
 #include "sort/sort.hpp"
@@ -13,6 +14,7 @@ int main() {
   // recursion::testNQueen();
   // sort::testSort();
   // search::testBinarySearch();
-  dp::testMinimumCountCoin();
+  // dp::testMinimumCountCoin();
+  dp::testKnapsack();
   return 0;
 }

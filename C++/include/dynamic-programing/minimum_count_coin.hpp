@@ -44,7 +44,7 @@ class MinimumCountCoin {
   std::vector<int> coins_;
   std::vector<int> d_;
   int money_;
-  void addHistory(const std::string record) { history_ += record + "\n"; };
+  void addHistory(const std::string& record) { history_ += record + "\n"; };
   int solve(int cur) {
     if (cur == 0) return 0;
     if (cur < 0) return INF;

@@ -6,6 +6,7 @@
 #include "n-queen/n_queen.hpp"
 #include "permutation/permutation.hpp"
 #include "sort/sort.hpp"
+#include "string/kmp.hpp"
 #include "subset/subset.hpp"
 
 int main() {
@@ -17,7 +18,8 @@ int main() {
   // search::testBinarySearch();
   // dp::testMinimumCountCoin();
   // dp::testKnapsack();
-  dp::testPermutationDP();
+  // dp::testPermutationDP();
+  str::testKMP();
 
   return 0;
 }

@@ -3,6 +3,7 @@
 #include "dynamic-programing/knapsack.hpp"
 #include "dynamic-programing/minimum_count_coin.hpp"
 #include "dynamic-programing/permutation_dp.hpp"
+#include "graph/dijkstra.hpp"
 #include "n-queen/n_queen.hpp"
 #include "permutation/permutation.hpp"
 #include "sort/sort.hpp"
@@ -19,7 +20,8 @@ int main() {
   // dp::testMinimumCountCoin();
   // dp::testKnapsack();
   // dp::testPermutationDP();
-  str::testKMP();
+  // str::testKMP();
+  graph::testDijkstra();
 
   return 0;
 }
